@@ -2,7 +2,7 @@
     
 
     <!--empieza el toolbar-->
-    <mat-toolbar style="background-color:#1565C0; color: white;" class="dashboard-toolbar">
+    <mat-toolbar color="primary">
         
         <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
         <h1 class = "h1.app-name"> S-Inventory</h1>
@@ -38,7 +38,7 @@
             <!--profile-->
             <div class="profile-card">
               <div class="header">
-                <h2>Edwin Orlando Castro</h2>
+                <h2>Edwin Castro</h2>
                 <h4>edwinorlandocastro@hotmail.com</h4>
               </div>
             </div>
@@ -55,9 +55,8 @@
           </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content>
-             <router-outlet></router-outlet>  
+             <router-outlet></router-outlet>
         </mat-sidenav-content>
     </mat-sidenav-container>
-   
-
+    
 </div>

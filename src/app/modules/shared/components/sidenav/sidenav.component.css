@@ -6,9 +6,10 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: azure;
 
 }
+
+
 .is-mobile .dashboard-toolbar{
     position: fixed;
     z-index: 2;
