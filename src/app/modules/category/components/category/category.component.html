@@ -39,7 +39,7 @@
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Acciones</th>
             <td mat-cell *matCellDef="let element; let i=index">
-              <button mat-icon-button color="accent" aria-label="Editar categoría">
+              <button mat-icon-button color="accent" (click)="edit(element.id, element.name, element.description)" aria-label="Editar categoría">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button color="accent" aria-label="Delete">

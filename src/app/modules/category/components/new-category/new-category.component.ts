@@ -1,44 +1,72 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import {CategoryService} from 'src/app/modules/shared/services/category.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CategoryService } from 'src/app/modules/shared/services/category.service';
 
 @Component({
   selector: 'app-new-category',
   templateUrl: './new-category.component.html',
-  styleUrls: ['./new-category.component.css']
+  styleUrls: ['./new-category.component.css'],
 })
 export class NewCategoryComponent implements OnInit {
-
   public categoryForm!: FormGroup;
+  estadoFormulario: string = "";
   private fb = inject(FormBuilder);
-  private categoryService=inject(CategoryService);
-  private dialogRef=inject(MatDialogRef);
+  private categoryService = inject(CategoryService);
+  private dialogRef = inject(MatDialogRef);
+  public data = inject(MAT_DIALOG_DATA);
+
   ngOnInit(): void {
-    
+    console.log(this.data);
+    this.estadoFormulario = "Agregar";
+
     this.categoryForm = this.fb.group({
-      name: ['',Validators.required],
-      description:['',Validators.required]
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+    });
+    if (this.data != null) {
+      this.updateForm(this.data);
+      this.estadoFormulario ="Actualizar"
+    }
+  }
+  updateForm(data: any) {
+    this.categoryForm = this.fb.group({
+      name: [data.name, Validators.required],
+      description: [data.description, Validators.required],
     });
   }
-  onSave(){
+
+  onSave() {
     let data = {
       name: this.categoryForm.get('name')?.value,
-      description: this.categoryForm.get('description')?.value
-    }
-    this.categoryService.saveCategories(data)
-     .subscribe((data: any) => {
-      console.log(data);
-      this.dialogRef.close(1);
-     },(error:any) =>{
-      this.dialogRef.close(2)
-     } )
+      description: this.categoryForm.get('description')?.value,
+    };
 
+    if (this.data != null) {
+      //update category
+      this.categoryService.uddateCategorie(data, this.data.id).subscribe(
+        (data: any) => {
+          this.dialogRef.close(1);
+        },
+        (error: any) => {
+          this.dialogRef.close(2);
+        },
+      );
+    } else {
+      //create new registery
+      this.categoryService.saveCategories(data).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.dialogRef.close(1);
+        },
+        (error: any) => {
+          this.dialogRef.close(2);
+        },
+      );
+    }
   }
 
-
-  onCancel(){
+  onCancel() {
     this.dialogRef.close(3);
   }
-  
 }
