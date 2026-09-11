@@ -42,7 +42,7 @@
               <button mat-icon-button color="accent" (click)="edit(element.id, element.name, element.description)" aria-label="Editar categoría">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button color="accent" aria-label="Delete">
+              <button mat-icon-button color="accent" (click)="delete(element.id )"    aria-label="Delete">
                 <mat-icon>Delete</mat-icon>
               </button>
             </td>
