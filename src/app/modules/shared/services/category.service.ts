@@ -42,4 +42,12 @@ export class CategoryService {
     const enpoint = `${base_url}/categories/${id}`;
     return this.http.delete(enpoint);
   }
+  /**
+   * 
+   * searh category
+   */
+  getCategoryById(id: any){
+    const endpoint = `${base_url}/categories/${id}`;
+    return this.http.get(endpoint);
+ }
 }

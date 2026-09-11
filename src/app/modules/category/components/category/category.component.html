@@ -9,7 +9,7 @@
       <div class="category-actions">
         <mat-form-field appearance="outline" class="search-field">
           <mat-label>Buscar categoría</mat-label>
-          <input matInput #input aria-label="Buscar categoría">
+          <input matInput #input (keyup)="buscar(input.value)" aria-label="Buscar categoría">
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
 
